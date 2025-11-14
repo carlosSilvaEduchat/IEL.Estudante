@@ -1,0 +1,56 @@
+@model IEL.Estudantes.Models.Estudante
+
+@{
+    ViewData["Title"] = "Novo Estudante";
+}
+
+<h1>Novo Estudante</h1>
+
+<hr />
+<div class="row">
+    <div class="col-md-6">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            
+            <div class="form-group">
+                <label asp-for="Nome" class="control-label"></label>
+                <input asp-for="Nome" class="form-control" />
+                <span asp-validation-for="Nome" class="text-danger"></span>
+            </div>
+            
+            <div class="form-group">
+                <label asp-for="CPF" class="control-label"></label>
+                <input asp-for="CPF" class="form-control cpf-mask" />
+                <span asp-validation-for="CPF" class="text-danger"></span>
+            </div>
+            
+            <div class="form-group">
+                <label asp-for="Endereco" class="control-label"></label>
+                <input asp-for="Endereco" class="form-control" />
+                <span asp-validation-for="Endereco" class="text-danger"></span>
+            </div>
+            
+            <div class="form-group">
+                <label asp-for="DataConclusao" class="control-label"></label>
+                <input asp-for="DataConclusao" type="date" class="form-control" />
+                <span asp-validation-for="DataConclusao" class="text-danger"></span>
+            </div>
+            
+            <div class="form-group mt-3">
+                <button type="submit" class="btn btn-primary">Salvar</button>
+                <a asp-action="Index" class="btn btn-secondary">Voltar</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    
+    <script>
+        // Máscara para CPF
+        $(document).ready(function(){
+            $('.cpf-mask').inputmask('999.999.999-99');
+        });
+    </script>
+}
