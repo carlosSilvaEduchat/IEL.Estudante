@@ -61,7 +61,7 @@ IEL.Estudantes/
 3. Execute `dotnet ef database update`
 4. Inicie com `dotnet run`
 
-## 📝 Observações do Candidato
+##  Observações do Candidato
 
 - Implementei validação completa de CPF, incluindo verificação de dígitos
 - Adicionei um sistema de temas claro/escuro com persistência
@@ -69,7 +69,7 @@ IEL.Estudantes/
 - Implementei mensagens de feedback para melhor experiência do usuário
 - Documentei todo o código e criei um README completo
 
-## 📬 Contato
+##  Contato
 
 - **Nome**: Carlos Henrique soares da Silva 
 - **E-mail**: c4henrique07@gmail.com
