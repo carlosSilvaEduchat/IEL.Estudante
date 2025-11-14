@@ -18,23 +18,26 @@ namespace IEL.Estudantes.Controllers
         }
 
         // GET: Estudantes
-        public async Task<IActionResult> Index(string searchString)
-        {
-            var estudantes = from e in _context.Estudantes
-                           select e;
+       public async Task<IActionResult> Index(string searchString)
+{
+    var estudantes = from e in _context.Estudantes
+                   select e;
 
-            if (!string.IsNullOrEmpty(searchString))
-            {
-                searchString = searchString.ToLower();
-                estudantes = estudantes.Where(e => 
-                    e.Nome.ToLower().Contains(searchString) || 
-                    e.CPF.Contains(searchString)
-                );
-            }
+    if (!string.IsNullOrEmpty(searchString))
+    {
+        // Remove a máscara do CPF para busca
+        string cpfSemMascara = searchString.Replace(".", "").Replace("-", "").ToLower();
+        string searchLower = searchString.ToLower();
+        
+        estudantes = estudantes.Where(e => 
+            e.Nome.ToLower().Contains(searchLower) || 
+            e.CPF.Replace(".", "").Replace("-", "").Contains(cpfSemMascara) || 
+            e.CPF.Contains(searchLower)
+        );
+    }
 
-            return View(await estudantes.ToListAsync());
-        }
-
+    return View(await estudantes.ToListAsync());
+}
         // GET: Estudantes/Details/5
         public async Task<IActionResult> Details(int? id)
         {
@@ -140,16 +143,18 @@ namespace IEL.Estudantes.Controllers
             return View(estudante);
         }
 
-        // POST: Estudantes/Delete/5
         [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
-        {
-            var estudante = await _context.Estudantes.FindAsync(id);
-            _context.Estudantes.Remove(estudante);
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
-        }
+[ValidateAntiForgeryToken]
+public async Task<IActionResult> DeleteConfirmed(int id)
+{
+    var estudante = await _context.Estudantes.FindAsync(id);
+    if (estudante != null)
+    {
+        _context.Estudantes.Remove(estudante);
+        await _context.SaveChangesAsync();
+    }
+    return RedirectToAction(nameof(Index));
+}
 
         private bool EstudanteExists(int id)
         {

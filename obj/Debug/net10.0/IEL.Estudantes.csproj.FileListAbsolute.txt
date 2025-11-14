@@ -186,7 +186,6 @@ C:\Users\ssoar\Desktop\IEL.Estudantes\obj\Debug\net10.0\rjsmcshtml.dswa.cache.js
 C:\Users\ssoar\Desktop\IEL.Estudantes\obj\Debug\net10.0\scopedcss\Views\Shared\_Layout.cshtml.rz.scp.css
 C:\Users\ssoar\Desktop\IEL.Estudantes\obj\Debug\net10.0\scopedcss\bundle\IEL.Estudantes.styles.css
 C:\Users\ssoar\Desktop\IEL.Estudantes\obj\Debug\net10.0\scopedcss\projectbundle\IEL.Estudantes.bundle.scp.css
-C:\Users\ssoar\Desktop\IEL.Estudantes\obj\Debug\net10.0\compressed\xf0xfisdqe-{0}-b9sayid5wm-b9sayid5wm.gz
 C:\Users\ssoar\Desktop\IEL.Estudantes\obj\Debug\net10.0\compressed\gygw0hj2p5-{0}-61n19gt1b8-61n19gt1b8.gz
 C:\Users\ssoar\Desktop\IEL.Estudantes\obj\Debug\net10.0\compressed\twcpjg4pkp-{0}-xtxxf3hu2r-xtxxf3hu2r.gz
 C:\Users\ssoar\Desktop\IEL.Estudantes\obj\Debug\net10.0\compressed\u4hb8l2o8f-{0}-bqjiyaj88i-bqjiyaj88i.gz
@@ -261,3 +260,6 @@ C:\Users\ssoar\Desktop\IEL.Estudantes\obj\Debug\net10.0\refint\IEL.Estudantes.dl
 C:\Users\ssoar\Desktop\IEL.Estudantes\obj\Debug\net10.0\IEL.Estudantes.pdb
 C:\Users\ssoar\Desktop\IEL.Estudantes\obj\Debug\net10.0\IEL.Estudantes.genruntimeconfig.cache
 C:\Users\ssoar\Desktop\IEL.Estudantes\obj\Debug\net10.0\ref\IEL.Estudantes.dll
+C:\Users\ssoar\Desktop\IEL.Estudantes\obj\Debug\net10.0\compressed\xf0xfisdqe-{0}-zgpj884f6c-zgpj884f6c.gz
+C:\Users\ssoar\Desktop\IEL.Estudantes\obj\Debug\net10.0\compressed\7e4cum03oy-{0}-i5unztdz7f-i5unztdz7f.gz
+C:\Users\ssoar\Desktop\IEL.Estudantes\obj\Debug\net10.0\compressed\vwtdd4x3o1-{0}-6ju57wz30b-6ju57wz30b.gz

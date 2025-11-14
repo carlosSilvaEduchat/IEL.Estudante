@@ -1,31 +1,95 @@
-html {
-  font-size: 14px;
-}
-
-@media (min-width: 768px) {
-  html {
-    font-size: 16px;
-  }
-}
-
-.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
-  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
-}
-
-html {
-  position: relative;
-  min-height: 100%;
-}
-
+/* Estilos globais que complementam o tema */
 body {
-  margin-bottom: 60px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 1.6;
 }
 
-.form-floating > .form-control-plaintext::placeholder, .form-floating > .form-control::placeholder {
-  color: var(--bs-secondary-color);
-  text-align: end;
+/* Ajustes para o tema escuro */
+[data-theme="dark"] .card {
+    background-color: #2d2d2d;
+    border-color: #3d3d3d;
 }
 
-.form-floating > .form-control-plaintext:focus::placeholder, .form-floating > .form-control:focus::placeholder {
-  text-align: start;
+[data-theme="dark"] .table {
+    --bs-table-bg: #2d2d2d;
+    --bs-table-striped-bg: #333;
+    --bs-table-hover-bg: #3d3d3d;
+    color: #f5f5f5;
+}
+
+[data-theme="dark"] .form-control,
+[data-theme="dark"] .form-select {
+    background-color: #2d2d2d;
+    border-color: #3d3d3d;
+    color: #f5f5f5;
+}
+
+[data-theme="dark"] .form-control:focus,
+[data-theme="dark"] .form-select:focus {
+    background-color: #2d2d2d;
+    color: #f5f5f5;
+    border-color: var(--iel-light-blue);
+    box-shadow: 0 0 0 0.25rem rgba(77, 199, 197, 0.25);
+}
+
+/* Ajustes para os botões no tema escuro */
+[data-theme="dark"] .btn-outline-secondary {
+    color: #f5f5f5;
+    border-color: #6c757d;
+}
+
+[data-theme="dark"] .btn-outline-secondary:hover {
+    background-color: #6c757d;
+    border-color: #6c757d;
+}
+
+/* Ajustes para os links */
+a {
+    color: var(--primary);
+    text-decoration: none;
+    transition: color 0.2s;
+}
+
+a:hover {
+    color: #004080;
+    text-decoration: underline;
+}
+
+[data-theme="dark"] a {
+    color: var(--iel-light-blue);
+}
+
+[data-theme="dark"] a:hover {
+    color: #3ab4b2;
+}
+
+/* Ajustes para o footer no tema escuro */
+[data-theme="dark"] .footer {
+    background-color: #1a1a1a !important;
+    color: #f5f5f5;
+}
+
+[data-theme="dark"] .text-muted {
+    color: #adb5bd !important;
+}
+
+/* Animações adicionais */
+.fade-in {
+    animation: fadeIn 0.3s ease-out;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Ajustes de responsividade */
+@media (max-width: 768px) {
+    .main-content {
+        padding: 1rem;
+    }
+    
+    .card {
+        margin-bottom: 1rem;
+    }
 }

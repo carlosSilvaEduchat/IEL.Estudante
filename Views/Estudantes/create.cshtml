@@ -2,55 +2,115 @@
 
 @{
     ViewData["Title"] = "Novo Estudante";
+    ViewData["ActivePage"] = "Estudantes";
 }
 
-<h1>Novo Estudante</h1>
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h1 class="h3 mb-0 text-gray-800">Novo Estudante</h1>
+    <a asp-action="Index" class="btn btn-secondary">
+        <i class="fas fa-arrow-left me-1"></i> Voltar para a lista
+    </a>
+</div>
 
-<hr />
-<div class="row">
-    <div class="col-md-6">
-        <form asp-action="Create">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            
-            <div class="form-group">
-                <label asp-for="Nome" class="control-label"></label>
-                <input asp-for="Nome" class="form-control" />
-                <span asp-validation-for="Nome" class="text-danger"></span>
+<div class="card shadow mb-4">
+    <div class="card-header py-3">
+        <h6 class="m-0 font-weight-bold text-primary">Dados do Estudante</h6>
+    </div>
+    <div class="card-body">
+        <div class="row">
+            <div class="col-md-8 mx-auto">
+                <form asp-action="Create" class="needs-validation" novalidate>
+                    <div asp-validation-summary="ModelOnly" class="alert alert-danger"></div>
+                    
+                    <div class="mb-3">
+                        <label asp-for="Nome" class="form-label">
+                            @Html.DisplayNameFor(model => model.Nome)
+                            <span class="text-danger">*</span>
+                        </label>
+                        <div class="input-group">
+                            <span class="input-group-text"><i class="fas fa-user"></i></span>
+                            <input asp-for="Nome" class="form-control" required />
+                        </div>
+                        <span asp-validation-for="Nome" class="text-danger small"></span>
+                        <div class="invalid-feedback">Por favor, informe o nome do estudante.</div>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label asp-for="CPF" class="form-label">
+                            @Html.DisplayNameFor(model => model.CPF)
+                            <span class="text-danger">*</span>
+                        </label>
+                        <div class="input-group">
+                            <span class="input-group-text"><i class="fas fa-id-card"></i></span>
+                            <input asp-for="CPF" class="form-control cpf-mask" placeholder="000.000.000-00" required />
+                        </div>
+                        <span asp-validation-for="CPF" class="text-danger small"></span>
+                        <div class="invalid-feedback">Por favor, informe um CPF válido.</div>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label asp-for="Endereco" class="form-label">
+                            @Html.DisplayNameFor(model => model.Endereco)
+                        </label>
+                        <div class="input-group">
+                            <span class="input-group-text"><i class="fas fa-map-marker-alt"></i></span>
+                            <input asp-for="Endereco" class="form-control" />
+                        </div>
+                        <span asp-validation-for="Endereco" class="text-danger small"></span>
+                    </div>
+                    
+                    <div class="mb-4">
+                        <label asp-for="DataConclusao" class="form-label">
+                            @Html.DisplayNameFor(model => model.DataConclusao)
+                        </label>
+                        <div class="input-group">
+                            <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
+                            <input asp-for="DataConclusao" type="date" class="form-control" />
+                        </div>
+                        <span asp-validation-for="DataConclusao" class="text-danger small"></span>
+                    </div>
+                    
+                    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                        <button type="reset" class="btn btn-outline-secondary me-md-2">
+                            <i class="fas fa-eraser me-1"></i> Limpar
+                        </button>
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fas fa-save me-1"></i> Salvar
+                        </button>
+                    </div>
+                </form>
             </div>
-            
-            <div class="form-group">
-                <label asp-for="CPF" class="control-label"></label>
-                <input asp-for="CPF" class="form-control cpf-mask" />
-                <span asp-validation-for="CPF" class="text-danger"></span>
-            </div>
-            
-            <div class="form-group">
-                <label asp-for="Endereco" class="control-label"></label>
-                <input asp-for="Endereco" class="form-control" />
-                <span asp-validation-for="Endereco" class="text-danger"></span>
-            </div>
-            
-            <div class="form-group">
-                <label asp-for="DataConclusao" class="control-label"></label>
-                <input asp-for="DataConclusao" type="date" class="form-control" />
-                <span asp-validation-for="DataConclusao" class="text-danger"></span>
-            </div>
-            
-            <div class="form-group mt-3">
-                <button type="submit" class="btn btn-primary">Salvar</button>
-                <a asp-action="Index" class="btn btn-secondary">Voltar</a>
-            </div>
-        </form>
+        </div>
     </div>
 </div>
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-    
     <script>
-        // Máscara para CPF
-        $(document).ready(function(){
-            $('.cpf-mask').inputmask('999.999.999-99');
-        });
+        // Ativar validação do formulário
+        (function () {
+            'use strict'
+            
+            // Buscar todos os formulários que precisam de validação
+            var forms = document.querySelectorAll('.needs-validation')
+            
+            // Loop sobre os formulários e evitar envio
+            Array.prototype.slice.call(forms)
+                .forEach(function (form) {
+                    form.addEventListener('submit', function (event) {
+                        if (!form.checkValidity()) {
+                            event.preventDefault()
+                            event.stopPropagation()
+                        }
+                        
+                        form.classList.add('was-validated')
+                    }, false)
+                })
+                
+            // Aplicar máscara de CPF
+            $(document).ready(function(){
+                $('.cpf-mask').mask('000.000.000-00', {reverse: true});
+            });
+        })()
     </script>
 }
