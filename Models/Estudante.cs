@@ -1,5 +1,6 @@
-using System;
 using System.ComponentModel.DataAnnotations;
+using Microsoft.AspNetCore.Mvc;
+using IEL.Estudantes.Validations;
 
 namespace IEL.Estudantes.Models
 {
@@ -13,9 +14,11 @@ namespace IEL.Estudantes.Models
         public string Nome { get; set; } = string.Empty;
 
         [Required(ErrorMessage = "O campo CPF é obrigatório")]
-        [RegularExpression(@"^\d{3}\.\d{3}\.\d{3}-\d{2}$",
-            ErrorMessage = "O CPF deve estar no formato 000.000.000-00")]
+        [Cpf(ErrorMessage = "CPF inválido")]
         [Display(Name = "CPF")]
+        [Remote(action: "VerifyCpf", controller: "Estudantes", 
+                AdditionalFields = nameof(Id),
+                ErrorMessage = "Este CPF já está cadastrado")]
         public string CPF { get; set; } = string.Empty;
 
         [StringLength(200, ErrorMessage = "O Endereço não pode ter mais que 200 caracteres")]

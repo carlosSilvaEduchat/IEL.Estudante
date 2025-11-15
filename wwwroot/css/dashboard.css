@@ -16,17 +16,81 @@
   --topbar-text: #ffffff;              /* Texto branco na topbar */
 }
 
-/* Tema escuro (mantido como estava) */
+/* Tema escuro */
 [data-theme="dark"] {
-  --bg-color: var(--dark-bg);
+  --bg-color: #1a1a1a;
   --text-color: #f5f5f5;
   --card-bg: #2d2d2d;
-  --sidebar-bg: #1a1a1a;
+  --card-border: #444;
+  --sidebar-bg: #121212;
   --sidebar-text: #e0e0e0;
   --topbar-bg: #1a1a1a;
   --topbar-text: #fff;
+  --input-bg: #2d2d2d;
+  --input-border: #444;
+  --input-text: #f5f5f5;
+  --table-bg: #2d2d2d;
+  --table-hover: #3d3d3d;
+  --table-border: #444;
+  --text-muted: #aaa;
 }
 
+/* Ajustes para o tema escuro */
+[data-theme="dark"] .card {
+  background-color: var(--card-bg);
+  border-color: var(--card-border);
+  color: var(--text-color);
+}
+
+[data-theme="dark"] .form-control,
+[data-theme="dark"] .form-select {
+  background-color: var(--input-bg);
+  border-color: var(--input-border);
+  color: var(--input-text);
+}
+
+[data-theme="dark"] .table {
+  color: var(--text-color);
+}
+
+[data-theme="dark"] .table th,
+[data-theme="dark"] .table td {
+  border-color: var(--table-border);
+}
+
+[data-theme="dark"] .table-hover tbody tr:hover {
+  background-color: var(--table-hover);
+  color: var(--text-color);
+}
+
+[data-theme="dark"] .text-muted {
+  color: var(--text-muted) !important;
+}
+
+[data-theme="dark"] .btn-outline-secondary {
+  color: var(--text-color);
+  border-color: var(--input-border);
+}
+
+[data-theme="dark"] .btn-outline-secondary:hover {
+  background-color: var(--table-hover);
+  border-color: var(--input-border);
+  color: var(--text-color);
+}
+
+/* Ajuste para o menu mobile no tema escuro */
+[data-theme="dark"] #mobileMenu {
+  background-color: var(--card-bg);
+  border: 1px solid var(--card-border);
+}
+
+[data-theme="dark"] #mobileMenu .nav-link {
+  color: var(--text-color);
+}
+
+[data-theme="dark"] #mobileMenu .nav-link:hover {
+  background-color: var(--table-hover);
+}
 /* Estilos base */
 body {
   background-color: var(--bg-color);

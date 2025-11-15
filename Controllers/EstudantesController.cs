@@ -5,39 +5,49 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using IEL.Estudantes.Data;
 using IEL.Estudantes.Models;
+using IEL.Estudantes.Services;
 
 namespace IEL.Estudantes.Controllers
 {
     public class EstudantesController : Controller
     {
         private readonly AppDbContext _context;
+        private readonly ICpfService _cpfService;
 
-        public EstudantesController(AppDbContext context)
+        public EstudantesController(AppDbContext context, ICpfService cpfService)
         {
             _context = context;
+            _cpfService = cpfService;
+        }
+
+        [AcceptVerbs("GET", "POST")]
+        public async Task<IActionResult> VerifyCpf(string cpf, int id = 0)
+        {
+            var exists = await _cpfService.CpfExistsAsync(cpf, id == 0 ? null : id);
+            return Json(!exists);
         }
 
         // GET: Estudantes
-       public async Task<IActionResult> Index(string searchString)
-{
-    var estudantes = from e in _context.Estudantes
-                   select e;
+        public async Task<IActionResult> Index(string searchString)
+        {
+            var estudantes = from e in _context.Estudantes
+                           select e;
 
-    if (!string.IsNullOrEmpty(searchString))
-    {
-        // Remove a máscara do CPF para busca
-        string cpfSemMascara = searchString.Replace(".", "").Replace("-", "").ToLower();
-        string searchLower = searchString.ToLower();
-        
-        estudantes = estudantes.Where(e => 
-            e.Nome.ToLower().Contains(searchLower) || 
-            e.CPF.Replace(".", "").Replace("-", "").Contains(cpfSemMascara) || 
-            e.CPF.Contains(searchLower)
-        );
-    }
+            if (!string.IsNullOrEmpty(searchString))
+            {
+                string cpfSemMascara = searchString.Replace(".", "").Replace("-", "").ToLower();
+                string searchLower = searchString.ToLower();
 
-    return View(await estudantes.ToListAsync());
-}
+                estudantes = estudantes.Where(e =>
+                    e.Nome.ToLower().Contains(searchLower) ||
+                    e.CPF.Replace(".", "").Replace("-", "").Contains(cpfSemMascara) ||
+                    e.CPF.Contains(searchLower)
+                );
+            }
+
+            return View(await estudantes.ToListAsync());
+        }
+
         // GET: Estudantes/Details/5
         public async Task<IActionResult> Details(int? id)
         {
@@ -143,18 +153,19 @@ namespace IEL.Estudantes.Controllers
             return View(estudante);
         }
 
+        // POST: Estudantes/Delete/5
         [HttpPost, ActionName("Delete")]
-[ValidateAntiForgeryToken]
-public async Task<IActionResult> DeleteConfirmed(int id)
-{
-    var estudante = await _context.Estudantes.FindAsync(id);
-    if (estudante != null)
-    {
-        _context.Estudantes.Remove(estudante);
-        await _context.SaveChangesAsync();
-    }
-    return RedirectToAction(nameof(Index));
-}
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> DeleteConfirmed(int id)
+        {
+            var estudante = await _context.Estudantes.FindAsync(id);
+            if (estudante != null)
+            {
+                _context.Estudantes.Remove(estudante);
+                await _context.SaveChangesAsync();
+            }
+            return RedirectToAction(nameof(Index));
+        }
 
         private bool EstudanteExists(int id)
         {

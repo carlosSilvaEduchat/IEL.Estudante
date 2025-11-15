@@ -41,9 +41,10 @@
                             <span class="text-danger">*</span>
                         </label>
                         <div class="input-group">
+
                             <span class="input-group-text"><i class="fas fa-id-card"></i></span>
-                            <input asp-for="CPF" class="form-control cpf-mask" placeholder="000.000.000-00" required />
-                        </div>
+                            <input asp-for="CPF" class="form-control" data-val-cpf placeholder="000.000.000-00" required />       
+                      </div>
                         <span asp-validation-for="CPF" class="text-danger small"></span>
                         <div class="invalid-feedback">Por favor, informe um CPF válido.</div>
                     </div>

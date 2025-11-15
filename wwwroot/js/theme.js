@@ -16,9 +16,15 @@ function toggleTheme() {
 
 // Função para atualizar o ícone do tema
 function updateThemeIcon(theme) {
-    const themeToggle = document.getElementById('theme-toggle');
-    if (themeToggle) {
-        themeToggle.innerHTML = theme === 'dark' ? '☀️' : '🌙';
+    const themeIcon = document.querySelector('#theme-toggle i');
+    if (themeIcon) {
+        if (theme === 'dark') {
+            themeIcon.classList.remove('fa-moon');
+            themeIcon.classList.add('fa-sun');
+        } else {
+            themeIcon.classList.remove('fa-sun');
+            themeIcon.classList.add('fa-moon');
+        }
     }
 }
 
@@ -32,18 +38,6 @@ function loadTheme() {
     
     // Atualiza o ícone do botão
     updateThemeIcon(savedTheme);
-}
-
-// Função para alternar o menu mobile
-function toggleMobileMenu() {
-    const mobileMenu = document.getElementById('mobileMenu');
-    if (mobileMenu) {
-        if (mobileMenu.style.display === 'none' || !mobileMenu.style.display) {
-            mobileMenu.style.display = 'block';
-        } else {
-            mobileMenu.style.display = 'none';
-        }
-    }
 }
 
 // Inicialização quando o DOM estiver carregado
@@ -78,10 +72,16 @@ document.addEventListener('DOMContentLoaded', function() {
             mobileMenu.style.display = 'none';
         }
     });
-    
-    // Aplica máscaras
-    if (window.jQuery) {
-        $('.cpf-mask').mask('000.000.000-00');
-        $('.date-mask').mask('00/00/0000');
-    }
 });
+
+// Função para alternar o menu mobile
+function toggleMobileMenu() {
+    const mobileMenu = document.getElementById('mobileMenu');
+    if (mobileMenu) {
+        if (mobileMenu.style.display === 'none' || !mobileMenu.style.display) {
+            mobileMenu.style.display = 'block';
+        } else {
+            mobileMenu.style.display = 'none';
+        }
+    }
+}

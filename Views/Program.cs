@@ -1,18 +1,23 @@
 using Microsoft.EntityFrameworkCore;
 using IEL.Estudantes.Data;
+using IEL.Estudantes.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
-builder.Services.AddControllersWithViews();
+// Adiciona serviços ao container.
+builder.Services.AddControllersWithViews()
+    .AddRazorRuntimeCompilation(); // Adiciona suporte a atualização em tempo real
 
 // Configuração do banco de dados SQLite
 builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection")));
 
+// Registra o serviço de validação de CPF
+builder.Services.AddScoped<ICpfService, CpfService>();
+
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
+// Configura o pipeline de requisições HTTP.
 if (!app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler("/Home/Error");
